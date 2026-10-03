@@ -1,55 +1,25 @@
-# gpu-architecture-memory-labs
+# GPU Architecture & Memory Labs
 
-Learn GPU execution and memory hierarchy by measuring SM/warp behavior, coalescing, shared memory, occupancy, latency hiding, precision, and Tensor Core eligibility.
+Measure how GPU execution hierarchy and memory hierarchy shape performance.
 
-This repository follows a **learn-by-example** progression:
+## Sequence
+1. Query device properties.
+2. Inspect thread/block/warp mapping.
+3. Measure global-memory stride.
+4. Compare coalesced vs strided access.
+5. Reuse data in shared memory.
+6. Create/avoid bank conflicts.
+7. Explore cache reuse.
+8. Compare FP32, FP16, and BF16 footprint/throughput.
+9. Compare Tensor Core-eligible matrix multiplication.
+10. Relate occupancy to latency hiding without treating occupancy as the goal.
 
-> concept → runnable example → correctness → measurement → profiling → diagnosis → optimization → validation → project
-
-## Basics coverage
-GPU architecture; SMs; warps; SIMT; registers/shared/L1/L2/global memory; latency hiding; occupancy; coalescing; precision; Tensor Cores.
-
-## Learning order
-1. GPU properties
-2. thread/warp/block mapping
-3. stride benchmark
-4. coalesced vs strided loads
-5. shared-memory tiling
-6. bank conflicts
-7. cache reuse
-8. FP32 vs FP16/BF16
-9. Tensor Core matmul
-
-## Repository layout
-- `fundamentals/` — concise mechanism notes and tiny demonstrations
-- `examples/` — runnable examples in learning order
-- `tests/` — deterministic and randomized correctness checks
-- `benchmarks/` — repeatable measurement harnesses
-- `profiling/` — profiler commands and evidence instructions
-- `optimizations/` — baseline → hypothesis → change → re-measure studies
-- `exercises/` — beginner through challenge tasks
-- `mini-projects/` — integrated practice
-- `advanced-projects/` — portfolio-grade work
-- `docs/` — deeper explanations and decision records
-- `scripts/` — setup/environment helpers
-- `references/` — primary-source references
-
-## Working rules
-1. Establish correctness before performance work.
-2. Define the measurement boundary.
-3. Warm up before steady-state measurements.
-4. Repeat measurements and report median plus spread.
-5. Profile before optimizing.
-6. Change one major variable at a time.
-7. Re-run correctness checks after every optimization.
-8. Never commit invented benchmark numbers; record actual environment metadata.
-
-## Environment
+## Build
 ```bash
-bash scripts/check_environment.sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j
+./build/device_properties
+./build/stride_benchmark 16777216
 ```
 
-GPU examples require compatible NVIDIA hardware/software. Hardware-dependent work is explicitly marked rather than simulated.
-
-## Completion standard
-A topic is complete only when you can explain the mechanism, run/build the example, validate correctness, measure it correctly, interpret relevant profiler evidence, and explain the trade-offs.
+Use Nsight Compute only after establishing a correct baseline. See `docs/latency-hiding-and-occupancy.md`.

@@ -1,36 +1,12 @@
-# Python
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.venv/
-venv/
-dist/
-*.egg-info/
-
-# C/C++ / CUDA
 build/
-Build/
 CMakeFiles/
 CMakeCache.txt
-cmake_install.cmake
 Makefile
-compile_commands.json
 *.o
-*.obj
-*.so
-*.a
 *.out
-
-# Profiler and benchmark outputs
-*.nsys-rep
-*.qdrep
 *.ncu-rep
-profiles/
-results/*.csv
-results/*.json
-results/*.txt
-
-# IDE / OS
+*.nsys-rep
+results/
 .vscode/
 .idea/
 .DS_Store

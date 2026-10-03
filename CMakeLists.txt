@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(gpu_architecture_memory_labs LANGUAGES CXX CUDA)
+set(CMAKE_CUDA_STANDARD 17)
+add_executable(device_properties examples/device_properties.cu)
+add_executable(stride_benchmark examples/stride_benchmark.cu)
